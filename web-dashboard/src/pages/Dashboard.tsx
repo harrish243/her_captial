@@ -27,24 +27,24 @@ const Dashboard = () => {
 
     if (userType === 'lender') {
         menuItems = [
-            { text: 'Overview', icon: <DashboardIcon />, path: '' },
-            { text: 'Portfolio', icon: <AccountBalanceWalletIcon />, path: 'portfolio' },
-            { text: 'Borrowers', icon: <PeopleIcon />, path: 'borrowers' },
-            { text: 'Settings', icon: <SettingsIcon />, path: 'settings' },
+            { text: 'Overview', icon: <DashboardIcon />, path: '/dashboard' },
+            { text: 'Portfolio', icon: <AccountBalanceWalletIcon />, path: '/dashboard/portfolio' },
+            { text: 'Borrowers', icon: <PeopleIcon />, path: '/dashboard/borrowers' },
+            { text: 'Settings', icon: <SettingsIcon />, path: '/dashboard/settings' },
         ];
     } else if (userType === 'admin') {
         menuItems = [
-            { text: 'Overview', icon: <DashboardIcon />, path: '' },
-            { text: 'User Management', icon: <SupervisorAccountIcon />, path: 'users' },
-            { text: 'Risk Analysis', icon: <AssessmentIcon />, path: 'risk' }, // Reusing TrustScore or similar for now
-            { text: 'Settings', icon: <SettingsIcon />, path: 'settings' },
+            { text: 'Overview', icon: <DashboardIcon />, path: '/dashboard' },
+            { text: 'User Management', icon: <SupervisorAccountIcon />, path: '/dashboard/users' },
+            { text: 'Risk Analysis', icon: <AssessmentIcon />, path: '/dashboard/risk' }, // Reusing TrustScore or similar for now
+            { text: 'Settings', icon: <SettingsIcon />, path: '/dashboard/settings' },
         ];
     } else { // Borrower
         menuItems = [
-            { text: 'My Dashboard', icon: <DashboardIcon />, path: '' },
-            { text: 'My Loans', icon: <AccountBalanceWalletIcon />, path: 'loans' },
-            { text: 'Trust Score', icon: <AssessmentIcon />, path: 'trust' },
-            { text: 'Profile', icon: <SettingsIcon />, path: 'settings' },
+            { text: 'My Dashboard', icon: <DashboardIcon />, path: '/dashboard' },
+            { text: 'My Loans', icon: <AccountBalanceWalletIcon />, path: '/dashboard/loans' },
+            { text: 'Trust Score', icon: <AssessmentIcon />, path: '/dashboard/trust' },
+            { text: 'Profile', icon: <SettingsIcon />, path: '/dashboard/settings' },
         ];
     }
 
@@ -66,7 +66,13 @@ const Dashboard = () => {
                 sx={{
                     width: drawerWidth,
                     flexShrink: 0,
-                    [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
+                    [`& .MuiDrawer-paper`]: {
+                        width: drawerWidth,
+                        boxSizing: 'border-box',
+                        bgcolor: '#0F172A', // Dark Slate
+                        color: '#F8FAFC',
+                        borderRight: 'none',
+                    },
                 }}
             >
                 <Toolbar />
@@ -74,9 +80,19 @@ const Dashboard = () => {
                     <List sx={{ flexGrow: 1 }}>
                         {menuItems.map((item) => (
                             <ListItem key={item.text} disablePadding>
-                                <ListItemButton onClick={() => navigate(item.path)}>
-                                    <ListItemIcon sx={{ color: 'primary.main' }}>{item.icon}</ListItemIcon>
-                                    <ListItemText primary={item.text} />
+                                <ListItemButton
+                                    onClick={() => navigate(item.path)}
+                                    sx={{
+                                        m: 1,
+                                        borderRadius: 2,
+                                        '&:hover': { bgcolor: 'rgba(255,255,255,0.08)' }
+                                    }}
+                                >
+                                    <ListItemIcon sx={{ color: '#94A3B8', minWidth: 40 }}>{item.icon}</ListItemIcon>
+                                    <ListItemText
+                                        primary={item.text}
+                                        primaryTypographyProps={{ fontWeight: 500, fontSize: '0.95rem' }}
+                                    />
                                 </ListItemButton>
                             </ListItem>
                         ))}
@@ -87,9 +103,16 @@ const Dashboard = () => {
                                 localStorage.removeItem('token');
                                 localStorage.removeItem('userType');
                                 navigate('/login');
-                            }}>
-                                <ListItemIcon><LogoutIcon /></ListItemIcon>
-                                <ListItemText primary="Logout" />
+                            }}
+                                sx={{
+                                    m: 1,
+                                    borderRadius: 2,
+                                    color: '#EF4444', // Red text
+                                    '&:hover': { bgcolor: 'rgba(239, 68, 68, 0.08)' }
+                                }}
+                            >
+                                <ListItemIcon sx={{ color: '#EF4444', minWidth: 40 }}><LogoutIcon /></ListItemIcon>
+                                <ListItemText primary="Logout" primaryTypographyProps={{ fontWeight: 600 }} />
                             </ListItemButton>
                         </ListItem>
                     </List>
