@@ -4,8 +4,6 @@
 
 A peer-to-peer microfinance platform that enables **collateral-free lending** by using artificial intelligence to analyze alternative data and generate trust scores for borrowers who lack traditional credit history.
 
----
-
 ## 📋 Table of Contents
 
 - [Overview](#overview)
