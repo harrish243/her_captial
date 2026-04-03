@@ -523,18 +523,13 @@ MODEL_PATH=./credit_model.pkl
 
 This project is licensed under the MIT License.
 
----
-
 ## 👨‍💻 Contributors
 
 Built with ❤️ for financial inclusion.
-
----
 
 ## 📞 Support
 
 For questions or issues, please open an issue on GitHub or contact the development team.
 
----
 
 **Made with AI-powered credit scoring to democratize access to capital.**
